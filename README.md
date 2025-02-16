@@ -57,3 +57,21 @@ A full-stack web application for managing grocery store operations, including cu
   - Manage products at `/products`
 
 ## Project Structure
+grocery-store/
+├── app.py # Main application entry point
+├── req.txt # Dependency requirements
+├── static/
+│ ├── css/ # CSS stylesheets
+│ ├── js/ # JavaScript files
+│ └── img/ # Product images storage
+├── templates/ # Jinja2 HTML templates
+│ ├── auth/ # Authentication templates
+│ │ ├── login.html
+│ │ └── register.html
+│ ├── admin/ # Manager templates
+│ │ ├── category.html
+│ │ └── products.html
+│ ├── cart.html # Shopping cart
+│ ├── home.html # Main store page
+│ └── base.html # Base template
+└── venv/ # Virtual environment (ignored)
