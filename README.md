@@ -20,24 +20,27 @@ A full-stack web application for managing grocery store operations, including cu
 
 ## Installation
 1. Clone the repository
-2. Create virtual environment:
+  ```bash
+git clone https://github.com/murali5613/Grocery-store.git
+```
+3. Create virtual environment:
    ```bash
    python -m venv venv
    source venv/bin/activate  # Linux/Mac
    venv\Scripts\activate  # Windows
    ```
-3. Install dependencies:
+4. Install dependencies:
    ```bash
    pip install -r req.txt
    ```
-4. Initialize database:
+5. Initialize database:
    ```bash
    flask shell
    >>> from app import db
    >>> db.create_all()
    >>> exit()
    ```
-5. Create required directories:
+6. Create required directories:
    ```bash
    mkdir -p static/img
    ```
