@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Checkout</h2>
+    {% for item in cart_items %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h3 class="card-title">{{ item['product_name'] }}</h3>
+            <p class="card-text">Price Per Unit: {{ item['cost_per_unit'] }}</p>
+            <p class="card-text">Quantity: {{ item['quantity'] }}</p>
+            <p class="card-text">Total Price: {{ item['total_price'] }}</p>
+        </div>
+    </div>
+    {% endfor %}
+    <p>Total Price: {{ total_price }}</p>
+    <form action="{{ url_for('home') }}">
+        <button type="submit" class="btn btn-primary">OK</button>
+    </form>
+</div>
+{% endblock %}

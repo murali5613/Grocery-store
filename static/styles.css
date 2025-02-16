@@ -1,0 +1,26 @@
+.custom-navbar {
+    background-color: #498bf5;
+}
+.grocery-heading {
+    font-size: 36px;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+.category-heading {
+    background: linear-gradient(90deg, #f8f9fa, #c8d6e5);
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.grocery-heading2 {
+    font-size: 36px;
+    font-family: 'Arial', sans-serif;
+    color: #201b1b;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+.cart-icon {
+    font-size: 36px;
+  }
+  

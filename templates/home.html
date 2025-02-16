@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            {% if session['username'] %}
+            <h5>Welcome, {{ session['username'] }}! <a href="/logout" class="btn btn-outline-primary">Logout</a></h5>
+            {% if session['is_manager'] %}
+            <h5><a href="/category" class="btn btn-outline-primary">Inventory Management</a></h5>
+            {% endif %}
+            {% else %}
+            <h5><a href="/login" class="btn btn-outline-primary">Login</a> <a href="/register" class="btn btn-outline-primary">Register</a></h5>
+            {% endif %}
+        </div>
+        <div class="col text-end ">
+          <h5><a href="/cart"><i class="fas fa-shopping-cart cart-icon"></i></a></h5>
+      </div>      
+    </div>
+
+
+    <div class="row mt-4">
+        <div class="col">
+            <form action="/search" method="post" class="d-flex">
+                <input type="text" name="search" class="form-control me-2" placeholder="Search">
+                <select name="field" class="form-select me-2">
+                    <option value="name">Name</option>
+                    <option value="MFG">Manufacture Date</option>
+                    <option value="EXP">Expiry Date</option>
+                    <option value="cost_per_unit">Cost Per Unit</option>
+                    <option value="section_id">Section/Category</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+
+    {% for category in categories %}
+    {% set product_list = products|selectattr("section_id", "equalto", category.id)|list %}
+    {% if product_list|length > 0 %}
+    <h3 class="mt-4 category-heading grocery-heading2">{{ category.name }}</h3>
+    <div class="row row-cols-1 row-cols-md-3 g-3">
+        {% for product in products if product.section_id == category.id %}
+        <div class="col">
+            <div class="card mb-3" style="max-width: 400px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ url_for('static', filename='img/' + product.image) }}" class="img-fluid rounded-start" alt="{{ product.name }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            {% if product.MFG %}
+                            <p class="card-text">Manufacture Date: {{ product.MFG }}</p>
+                            {% endif %}
+                            {% if product.EXP %}
+                            <p class="card-text">Expiry Date: {{ product.EXP }}</p>
+                            {% endif %}
+                            <p class="card-text">Cost Per Unit: {{ product.cost_per_unit }} /{{ product.units }}</p>
+                            <p class="card-text">In stock: {{ product.stock }}</p>
+                            {% if product.stock > 0 %}
+                            <form action="/add_to_cart" method="post">
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                            </form>
+                            {% else %}
+                            <p class="text-danger">Currently, this item is out of stock.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}
